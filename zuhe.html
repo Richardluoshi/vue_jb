@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>移动端拖拽、旋转、放大、缩小图片</title>
+		<meta charset="utf-8">
+		<meta name="full-screen" content="yes">
+    	<meta name="browsermode" content="application">
+		<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<link rel="stylesheet" type="text/css" href="css/trans.css" />
+		<link rel="stylesheet" type="text/css" href="css/transit.css" />
+		<style type="text/css">
+			.preventDefault{
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.myphoto{
+				background: #eee;
+			}
+			.kt{
+				position: absolute;
+				top:15vh;
+				left: 0;
+				display: flex;
+				width: 100%;
+				height: 75vh;
+				/*height: 40vh;*/
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+			}
+			.kt img{
+				width: 100%;
+			}
+			.congratulate{
+				height: 15vh;
+				background: none;
+				top:0;
+				left:0;
+				background: #fff;
+			}
+			.congratulate .congratulatetitle{
+				height: 100%;
+				width: 100%;
+				display: flex;
+				flex-wrap: nowrap;
+				top:0;
+				left:0;
+				margin:0;
+			}
+			.congratulate .congratulatetitle p{
+				width: 100%!important;
+				height: 100%!important;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin:0!important;
+				overflow: hidden;
+			}
+			.congratulate .congratulatetitle p img{
+				width: 90%;
+				height: auto;
+			}
+			.myphoto .move .rotate,.myphoto .move .close{
+				width: 0.4rem;
+				height: 0.4rem;
+			}
+			.myphoto .move .rotate{
+				top:-0.4rem;
+				right: -0.4rem;
+			}
+			.myphoto .move .close{
+				left:-0.4rem;
+				bottom: -0.4rem;
+			}
+			.nav{
+				position: absolute;
+				left:0;
+				bottom:0;
+				display: flex;
+				width: 100%;
+				height: 10vh;
+				background: #fff
+			}
+			.nav-btn{
+				height: 100%;
+				width: 100%;
+				box-sizing: border-box;
+				/*border:1px solid #ccc;*/
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.nav-btn > div{
+				display: flex;
+				overflow: hidden;
+				/*justify-content: center;*/
+			}
+			.nav-icon{
+				height: 5vh;
+				width: 5vh;
+			}
+			.nav-icon img{
+				width: 100%;
+				height: 100%;
+			}
+			.nav-title{
+				height: 5vh;
+				line-height: 5vh;
+				font-size:4.5vw;
+				padding-left: 2vw;
+				font-weight: bold;
+				color:#888;
+			}
+		</style>
+	</head>
+	<body>
+		<article style="opacity: 0;" class="preventDefault">
+			<section class="myphoto ">
+				<div class="imgbox"></div>
+				<!-- <div class="btnbox">
+					<span class="btn-choose"></span>
+				</div> -->
+			</section>
+			<section class="congratulate">
+				<div class="congratulatetitle">
+					<!-- <div class="choosetitle"></div> -->
+					<p class="title1" data-id="1"><img src="img/product03.jpg"></p>
+					<p class="title2" data-id="2"><img src="img/product04.jpg"></p>
+					<p class="title3" data-id="3"><img src="img/bless-txt3.png"></p>
+					<!-- <p class="title1" data-id="1"><div><img src="img/p1.png"></div></p>
+					<p class="title2" data-id="2"><div><img src="img/p1.png"></div></p>
+					<p class="title3" data-id="3"><div><img src="img/p1.png"></div></p> -->
+				</div>
+			</section>
+			<div class="kt">
+				<img id="kt-img" src="img/kt.jpg">
+			</div>
+			<div class="nav">
+				<div class="nav-btn">
+					<div>
+						<div class="nav-icon"><img src="img/star.png"></div>
+						<div class="nav-title" style="color: #ED6D50;">关注</div>
+					</div>
+				</div>
+				<div class="nav-btn">
+					<div>
+						<div class="nav-icon"><img src="img/heart.png"></div>
+						<div class="nav-title">有意</div>
+					</div>
+				</div>
+				<div class="nav-btn">
+					<div onclick="upload()">
+						<div class="nav-icon"><img src="img/img.png"></div>
+						<div class="nav-title">换底图</div>
+					</div>
+					<input id="uploaderInput" name="dt" type="file" accept="image/*" style="display: none;" />
+				</div>
+			</div>
+		</article>
+		<script src="js/jweixin.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/transit.js"></script>
+		<script src="js/trans.js"></script>
+		<script type="text/javascript">
+			function upload(){
+				$('#uploaderInput').click();
+			}
+			$('#uploaderInput').on("change", function(e){
+				var path = $(this).val();
+	        	var arr = path.split('.');
+	        	var ext = arr[arr.length - 1].toUpperCase();
+	        	if(ext !== 'PNG' && ext !== 'JPG' && ext !== 'JPEG' && ext !== 'GIF'){
+			      alert('请上传png/jpg/gif格式的图片');
+			      $(this).val('');
+			      return false;
+			    }
+			    $("#kt-img").attr("src",URL.createObjectURL($(this)[0].files[0]));
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>线上家博会--企业页面--竖版</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		div{
+			box-sizing: border-box;
+			border:1px solid #ccc;
+		}
+		.contain{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+  			flex-wrap: wrap;
+		}
+		.contain>div{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+  			
+  			width: 100vw;
+  			/*flex-basis: 100vw;*/
+			
+		}
+		.pro-title,.pro-cop{
+			justify-content: center;
+			align-items: center;
+		}
+		.pro-title{
+			height: 15vh;
+			font-size:8vw;
+		}
+		.pro-statistics{
+			height: 15vh;
+		}
+		.pro-img{
+			height: 45vh;
+		}
+		.pro-list{
+			height: 20vh;
+		}
+		.pro-cop{
+			height: 5vh;
+		}
+		.big-img,.small-img{
+			height: 100%;
+		}
+		.big-img{
+			width: 66vw;
+		}
+		.small-img{
+			width: 34vw;
+		}
+		.big-img-box{
+			width: 100%;
+			height: 66%;
+		}
+		.big-img-intro{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+			width: 100%;
+			height: 34%;
+			padding:2vw;
+			align-items: center;
+			font-size:3vw;
+			text-indent: 2em;
+		}
+		.small-img-item{
+			width: 100%;
+			height: 33.3%;
+		}
+		.pro-list-item{
+			width: 100%;
+			height: 100%;
+		}
+		.pro-statis-item{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+			height: 100%;
+			width: 100%;
+			justify-content: center;
+			align-items: center;
+		}
+		.pro-statis-in{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+  			border-radius: 7.5vw;
+			/*width: 80%;*/
+			/*height: 85%;*/
+		}
+		.pro-statis-icon{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+			width: 15vw;
+			height: 15vw;
+			/*border-radius: 50%;*/
+			justify-content: center;
+			align-items: center;
+		}
+		.pro-statis-content{
+			width: 26vw;
+			height: 15vw;
+		}
+		.pro-statis-icon img{
+			width: 75%;
+		}
+		.pro-statis-content p{
+			font-size:4vw;
+			height: 7.5vw;
+			line-height: 7.5vw;
+			padding-left:2vw;
+			font-weight: bold;
+		}
+		.pro-statis-content.right p{
+			text-align: right;
+			padding-right: 2vw;
+		}
+	</style>
+</head>
+<body>
+	<div class="contain">
+		<!-- 产品名称 -->
+		<div class="pro-title">
+			镜花水月
+		</div>
+		<!-- 产品统计数据 -->
+		<div class="pro-statistics">
+			<div class="pro-statis-item">
+				<div class="pro-statis-in">
+					<div class="pro-statis-icon">
+						<img src="img/star.png">
+					</div>
+					<div class="pro-statis-content">
+						<p>关注度</p>
+						<p>1820</p>
+					</div>
+				</div>
+			</div>
+			<div class="pro-statis-item">
+				<div class="pro-statis-in">
+					<div class="pro-statis-content right">
+						<p>有意向</p>
+						<p>820</p>
+					</div>
+					<div class="pro-statis-icon">
+						<img src="img/heart.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 产品图片 -->
+		<div class="pro-img">
+			<div class="big-img">
+				<div class="big-img-box"></div>
+				<div class="big-img-intro">
+					镜花水月，汉语成语，拼音是jìng huā shuǐ yuè，意思是镜里的花，水里的月；原指诗中灵活而不可捉摸的意境，后比喻虚幻的景象。出自《诗家直说》。
+				</div>
+			</div>
+			<div class="small-img">
+				<div class="small-img-item"></div>
+				<div class="small-img-item"></div>
+				<div class="small-img-item"></div>
+			</div>
+		</div>
+		<!-- 所有产品图片列表 -->
+		<div class="pro-list">
+			<div class="pro-list-item"></div>
+			<div class="pro-list-item"></div>
+			<div class="pro-list-item"></div>
+		</div>
+		<!-- 企业名称 -->
+		<div class="pro-cop">
+			江西博纳思信息工程有限公司
+		</div>
+	</div>
+</body>
+</html>

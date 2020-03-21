@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>线上家博会--企业页面--竖版</title>
+	<link href="css/flexslider.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script src="js/vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+			color:#fff;
+		}
+		body{
+			background: #363b48;
+		}
+		div{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+			box-sizing: border-box;
+		}
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		img{
+		   /*pointer-events:none;*/
+		   -webkit-touch-callout: none;
+		   -webkit-user-select:none;-moz-user-select:none;user-select:none;
+		}
+		.contain{
+			display: -webkit-flex; /* Safari */
+  			display: flex;
+  			flex-wrap: wrap;
+		}
+		.contain>div{
+  			width: 100vw;
+  			border:1.5vw solid #363b48;
+  			/*flex-basis: 100vw;*/
+		}
+		.pro-title,.pro-cop{
+			justify-content: center;
+			align-items: center;
+			font-size:3.5vw;
+		}
+		.pro-title{
+			height: 15vh;
+			font-size:8vw;
+			background: #9e7ac2;
+		}
+		.pro-statistics{
+			height: 15vh;
+			background: #00b6de;
+			border-top:none!important;
+		}
+		.pro-img{
+			height: 45vh;
+			flex-wrap: wrap;
+			background: #ff7659;
+			border-top:none!important;
+		}
+		.pro-list{
+			display: block;
+			width: 100vw;
+			height: 20vh;
+			background: #ff7659;
+			position: relative;
+			overflow: hidden;
+			margin:0;
+			/*border-top:none!important;*/
+		}
+		.pro-cop{
+			height: 5vh;
+			background: #9e7ac2;
+			border-top:none!important;
+		}
+		.big-img{
+			width: 100%;
+			/*height: 66%;*/
+			height: 29.7vh;
+			flex-wrap: nowrap;
+			border-bottom: 1.5vw solid #363b48;
+		}
+		.small-img{
+			width: 34%;
+			height: 100%;
+			flex-wrap: wrap;
+		}
+		.big-img-box{
+			width: 66%;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+			border-right: 1.5vw solid #363b48;
+		}
+		.big-img-box >div{
+			/*justify-content: center;*/
+			align-items: center;
+			width: 85%;
+			height: 85%;
+			overflow: hidden;
+			/*background: #fff;*/
+		}
+		.big-img-box >div img{
+			width: 100%;
+			/*height: 100%;*/
+		}
+		.img-intro{
+			width: 100%;
+			/*height: 34%;*/
+			height: 15.3vh;
+			/*padding:2vw;*/
+			
+			font-size:3vw;
+			text-indent: 2em;
+			/*border-top: 1.5vw solid #363b48;*/
+			background: #00b6de;
+		}
+		.intro-content{
+			padding:2vw;
+			height: 100%;
+			width: 100%;
+			align-items: center;
+			border-right: 1.5vw solid #363b48;
+			line-height: 4vw;
+		}
+		.intro-code{
+			width: 15.3vh;
+			height: 15.3vh;
+			justify-content: center;
+			align-items: center;
+			flex-shrink:0;
+		}
+		.intro-code img{
+			width: 90%;
+		}
+		.small-img-item{
+			width: 100%;
+			height: 50%;
+			justify-content: center;
+			align-items: center;
+		}
+		.small-img-item > div{
+			justify-content: center;
+			align-items: center;
+			width: 90%;
+			height: 90%;
+			overflow: hidden;
+			/*background: #fff;*/
+		}
+		.small-img-item > div img{
+			width: 100%;
+		}
+		.pro-list div{
+			display: block;
+		}
+		.pro-list-item{
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+		}
+		.pro-list-item > div{
+			justify-content: center;
+			align-items: center;
+			width: 90%;
+			height: 90%;
+			overflow: hidden;
+		}
+		.pro-list-item > div img{
+			width: 100%;
+		}
+		.pro-statis-item{
+			height: 100%;
+			width: 100%;
+			justify-content: center;
+			align-items: center;
+		}
+		.pro-statis-in{
+  			border-radius: 7.5vw;
+			/*width: 80%;*/
+			/*height: 85%;*/
+			overflow: hidden;
+			background: #9e7ac2;
+			color:#fff;
+		}
+		.pro-statis-icon{
+			width: 15vw;
+			height: 15vw;
+			border-radius: 50%;
+			border:10px solid #9e7ac2;
+			justify-content: center;
+			align-items: center;
+			background: #fff;
+		}
+		.pro-statis-content{
+			width: 26vw;
+			height: 15vw;
+			flex-wrap: wrap;
+		}
+		.pro-statis-icon img{
+			width: 70%;
+		}
+		.pro-statis-content p{
+			width: 100%;
+			font-size:4vw;
+			height: 7.5vw;
+			line-height: 7.5vw;
+			padding-left:2vw;
+			font-weight: bold;
+		}
+		.pro-statis-content.right p{
+			text-align: right;
+			padding-right: 2vw;
+		}
+		.pro-list > div{
+			height: 100%;
+		}
+		.scroll-list{
+			display: block;
+			/*width: 150vw;*/
+			flex-wrap: wrap;
+			height: 100%;
+		}
+		.scroll-list div{
+			display: block;
+		}
+		.scroll-list > div{
+			height: 100%;
+		}
+		.scroll-list li {
+			/*float: left;*/
+			/*margin: 0 15px;*/
+			/*line-height: 30px;*/
+			/*text-align: center;*/
+			height: 100%;
+			padding:1vw;
+			box-sizing: border-box;
+		}
+		.scroll-list li > div{
+			height: 100%;
+			overflow: hidden;
+		}
+		.pro-list-item{
+			/*display: block;*/
+			/*width: 50%;*/
+			float: left;
+			width: 50vw;
+		}
+		.dire{
+			position: absolute;
+			width:8vw;
+			height: 8vw;
+			top:50%;
+			margin-top: -4vw;
+		}
+		#left{
+			left:1vw;
+		}
+		#right{
+			right: 1vw;
+		}
+		.dire img{
+			width: 100%;
+			height: 100%;
+		}
+
+		.box{
+			text-align: center;
+			background: #ff7659;
+		}
+		.box .close{
+			width: 80px;
+			height: 80px;
+		}
+		.box img {
+		    position: absolute;
+			width: 85%;
+			top:50%!important;
+			left: 50%!important;
+			-webkit-transform: translate(-50%,-50%)!important;
+    		-moz-transform: translate(-50%,-50%)!important;
+    		transform:translate(-50%,-50%)!important;
+		    transition: .2s;
+		    -webkit-transition-delay: 0.2s;
+		    -ms-transition-delay: 0.2s;
+		    transition-delay: 0.2s;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="contain" id="contain">
+		<!-- <div>{{ info }}</div> -->
+		<!-- <div>{{ current_pro }}</div> -->
+		<!-- 产品名称 -->
+		<div class="pro-title">
+			镜花水月
+		</div>
+		<!-- 产品统计数据 -->
+		<div class="pro-statistics">
+			<div class="pro-statis-item">
+				<div class="pro-statis-in">
+					<div class="pro-statis-icon">
+						<img src="img/star.png">
+					</div>
+					<div class="pro-statis-content">
+						<p>关注度</p>
+						<p id='number1'>1820</p>
+					</div>
+				</div>
+			</div>
+			<div class="pro-statis-item">
+				<div class="pro-statis-in">
+					<div class="pro-statis-content right">
+						<p>有意向</p>
+						<p id='number2'>820</p>
+					</div>
+					<div class="pro-statis-icon">
+						<img src="img/heart.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 产品图片 -->
+		<div class="pro-img">
+			<div class="big-img">
+				<div class="big-img-box">
+					<div v-for="(img,index) in current_pro.imgs" v-if="index == 0">
+						<img v-bind:src="img" onclick="showBig(this)">
+					</div>
+				</div>
+				<div class="small-img">
+					<div class="small-img-item" v-for="(img,index) in current_pro.imgs" v-if="index > 0">
+						<div>
+							<img v-bind:src="img" onclick="showBig(this)">
+						</div>
+					</div>
+					<!-- <div class="small-img-item">
+						<div>
+							<img v-show="current_pro.imgs[2]" v-bind:src="current_pro.imgs[2]" onclick="showBig(this)">
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<div class="img-intro">
+				<div class="intro-content">
+					{{ current_pro.intro }}
+				</div>
+				<div class="intro-code">
+					<img src="img/code.png">
+				</div>
+			</div>
+		</div>
+		<!-- 所有产品图片列表 -->
+		<div class="pro-list flexslider">
+			<!-- <div class="dire" id="left">
+				<img src="img/left.png">
+			</div> -->
+			<ul class="scroll-list slides" id="scroll-list">
+				<li>
+					<div>
+						<img src="img/product06.jpg">
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="img/product03.jpg">
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="img/product07.jpg">
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="img/product09.jpg">
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="img/product05.jpg">
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="img/product04.jpg">
+					</div>
+				</li>
+			</ul>
+			<!-- <div class="scroll-list" id="scroll-list">
+				<div class="pro-list-item">
+					<div>
+						<img src="img/product06.jpg">
+					</div>
+				</div>
+				<div class="pro-list-item">
+					<div>
+						<img src="img/product07.jpg">
+					</div>
+				</div>
+				<div class="pro-list-item">
+					<div>
+						<img src="img/product08.jpg">
+					</div>
+				</div>
+				<div class="pro-list-item">
+					<div>
+						<img src="img/product09.jpg">
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="dire" id="right">
+				<img src="img/right.png">
+			</div> -->
+			<!-- <div class="pro-list-item"></div> -->
+		</div>
+		<!-- 企业名称 -->
+		<div class="pro-cop">
+			江西采木园家具
+		</div>
+	</div>
+	<div class="box">
+	  <span class="close"></span>
+	  <img src="">
+	</div>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/flexslider.min.js"></script>
+	<script type="text/javascript">
+
+		//创建vue实例
+		new Vue({
+			  el: '#contain',
+			  data () {
+			    return {
+			      info: 1,
+			      current_pro : {
+			      	intro:'',
+			      	imgs:[]
+			      },
+			      pro_list:[]
+			    }
+			  },
+			  mounted () {
+			  	var _this = this;
+			    axios
+			      // .get('http://localhost:500/index/Pub/getInfo')
+			      .get('http://59.53.89.18:8002/index/Pub/getInfo', {
+				    params: {
+				      brand_id: '1191275136595136512'
+				    }
+				  })
+			      .then(function(response){
+			      	console.log(response.data.data.current_pro);
+			      	// _this.info = response.data.data.current_pro;
+			      	_this.current_pro = response.data.data.current_pro;
+			      })
+			      .catch(function (error) { // 请求失败处理
+			        console.log(error);
+			      });
+			  }
+			});
+		// document.write(vm.info);
+		// console.log(vm.info);
+		
+		var bw = $('.pro-list').width();
+		var w = bw/2;
+		function magic_number(value,num) {
+		    num.animate({ count: value }, {
+		        duration: 2000, //持续时间  
+		        step: function () {
+		            num.text(Math.round(this.count));
+		       }
+		    });
+		};
+		magic_number(1820, $("#number1"));
+		magic_number(960, $("#number2"));
+
+		function showBig(obj){
+			var src = $(obj).attr('src');
+			// console.log(src);
+			$('.box').find('img').attr('src',src);
+		    $('.box').addClass('open');
+		}
+		$('.close').click(function () {
+            $('.box').removeClass('open');
+        });
+
+		$(function () {
+			// console.log(w.toFixed(0));
+			$(".flexslider").flexslider({
+				animation: 'slide',                 // 必备参数，自动滑动
+				start: function(slider){
+					$('.flexslider').resize();
+				},
+                slideshowSpeed: 3500,              // 每次自动滑动间隔时间，默认为 7000，单位为 ms
+                animationSpeed: 800,              // 手动点击滑动时间，默认为 600，单位为 ms
+                itemWidth: w,                  // 定义每个 item 宽度，单位为 px，默认为 100%
+                slideshow: true,                //载入页面时，是否自动播放
+                directionNav: true,
+                pauseOnHover: false,
+                animationLoop: true,	//循环播放
+                // minItems:3
+                after: function(slider){ 
+			        slider.pause(); 
+			        slider.play(); 
+			    }
+			});  
+			// $('#scroll-list li').css("width","500px");
+			// console.log($('#scroll-list li').width());           
+		});
+	</script>
+</body>
+</html>
